@@ -179,17 +179,28 @@ load("@io_bazel_rules_sass//:defs.bzl", "sass_repositories")
 
 sass_repositories()
 
-http_archive(
+# http_archive(
+#     name = "org_tensorflow",
+#     patch_args = ["-p1"],
+#     patches = [
+#         "//third_party:tensorflow.patch",
+#         "//third_party:tensorflow_add_grpc_cares_darwin_arm64_support.patch",
+#     ],
+#     strip_prefix = "tensorflow-master",
+#     urls = [
+#         "https://github.com/tensorflow/tensorflow/archive/refs/heads/master.zip",
+#     ],
+# )
+
+git_repository(
     name = "org_tensorflow",
     patch_args = ["-p1"],
     patches = [
         "//third_party:tensorflow.patch",
         "//third_party:tensorflow_add_grpc_cares_darwin_arm64_support.patch",
     ],
-    strip_prefix = "tensorflow-master",
-    urls = [
-        "https://github.com/tensorflow/tensorflow/archive/refs/heads/master.zip",
-    ],
+    commit = "18fa2196b08f052c0a7d71c3ae5aca8982b57ea2",
+    remote = "https://github.com/yliu120/tensorflow.git",
 )
 
 load(
